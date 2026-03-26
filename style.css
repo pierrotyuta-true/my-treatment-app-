@@ -1,11 +1,11 @@
 :root {
-    --bg-color: #f0f2f5;
+    --bg-color: #f5f6f8;
     --sidebar-bg: #ffffff;
-    --primary-color: #4a90e2;
-    --text-main: #333;
-    --text-muted: #888;
+    --primary-color: #5c7cfa;
+    --text-main: #2c2e33;
+    --text-muted: #868e96;
     --accent-color: #fff3bf;
-    --border-color: #eeeeee;
+    --border-color: #e9ecef;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -13,31 +13,34 @@ body { margin: 0; font-family: 'Pretendard', sans-serif; background: var(--bg-co
 
 #app { display: flex; height: 100%; }
 
-/* 사이드바 */
-#sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; transition: 0.3s; }
-.sidebar-header { padding: 20px; border-bottom: 1px solid var(--border-color); font-weight: bold; }
-.folder-list { flex: 1; overflow-y: auto; padding: 10px; list-style: none; margin: 0; }
-.folder-item { padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 5px; color: var(--text-muted); }
-.folder-item.active { background: #eef5ff; color: var(--primary-color); font-weight: 600; }
+/* 사이드바 스타일 */
+#sidebar { width: 280px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; transition: 0.3s; }
+.sidebar-header { padding: 25px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+.new-btn { background: var(--primary-color); color: white; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+.story-list { flex: 1; overflow-y: auto; padding: 10px; list-style: none; margin: 0; }
+.story-item { padding: 12px 15px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; font-size: 0.9rem; }
+.story-item.active { background: #edf2ff; color: var(--primary-color); font-weight: 600; }
+.story-item.child { margin-left: 15px; font-size: 0.85rem; border-left: 2px solid var(--border-color); }
 
-/* 메인 영역 */
-#main-container { flex: 1; display: flex; flex-direction: column; position: relative; }
-header { height: 60px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid var(--border-color); z-index: 5; }
+/* 메인 영역 및 헤더 */
+#main-container { flex: 1; display: flex; flex-direction: column; }
+header { height: 65px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 25px; border-bottom: 1px solid var(--border-color); }
+#edit-btn { background: var(--primary-color); color: white; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; }
+#sub-doc-btn { background: #f1f3f5; border: 1px solid var(--border-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; margin-right: 5px; font-size: 0.85rem; }
 
-#edit-btn { background: var(--primary-color); color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; }
-#edit-btn.editing { background: #34c759; }
+/* 본문 종이 스타일 */
+#content-wrapper { flex: 1; overflow-y: auto; padding: 30px; display: flex; justify-content: center; }
+.paper { width: 100%; max-width: 760px; background: #fff; padding: 50px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
 
-#content-wrapper { flex: 1; overflow-y: auto; padding: 20px; display: flex; justify-content: center; }
-.paper { width: 100%; max-width: 800px; background: #fff; min-height: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+#viewer, #editor { font-family: 'Gowun Batang', serif; font-size: 0.95rem; line-height: 1.85; }
+#viewer { white-space: pre-wrap; }
+.highlight { background: var(--accent-color); padding: 1px 3px; }
+#editor { width: 100%; height: 75vh; border: none; outline: none; display: none; resize: none; }
 
-#viewer { line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; }
-.highlight { background: var(--accent-color); padding: 2px 4px; border-radius: 4px; }
-#editor { width: 100%; height: 600px; border: none; outline: none; display: none; font-size: 1.1rem; line-height: 1.8; resize: none; }
-
-/* 모바일 반응형 */
+/* 모바일 전용 */
 @media (max-width: 768px) {
-    #sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 10; transform: translateX(-100%); }
+    #sidebar { position: fixed; left: 0; transform: translateX(-100%); z-index: 10; height: 100%; }
     #sidebar.open { transform: translateX(0); }
-    #menu-btn { display: block; background: none; border: none; font-size: 24px; cursor: pointer; }
-    #sidebar-overlay.open { display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 9; }
+    #menu-btn { display: block; background: none; border: none; font-size: 24px; }
+    #sidebar-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.2); z-index: 9; }
 }
