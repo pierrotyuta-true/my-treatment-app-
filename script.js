@@ -1,28 +1,44 @@
 let isEditing = false;
+let contentData = "1. 오프닝\n주인공 '민우'는 평범한 회사원이지만... ==의문의 편지==를 받게 되면서 일상이 균열이 간다.";
 
-function toggleEditMode() {
-    const viewer = document.getElementById('viewer');
-    const editor = document.getElementById('editor');
-    const btn = document.getElementById('edit-btn');
+const viewer = document.getElementById('viewer');
+const editor = document.getElementById('editor');
+const editBtn = document.getElementById('edit-btn');
+const sidebar = document.getElementById('sidebar');
 
+function render() {
+    const htmlContent = contentData.replace(/==(.+?)==/g, '<span class="highlight">$1</span>');
+    viewer.innerHTML = htmlContent;
+    editor.value = contentData;
+}
+
+function handleEdit() {
     if (!isEditing) {
-        // 편집 모드로 전환
-        editor.value = viewer.innerText; // 현재 내용을 에디터로 복사
         viewer.style.display = 'none';
         editor.style.display = 'block';
-        btn.innerText = '저장 완료';
+        editBtn.innerText = '저장 완료';
+        editBtn.classList.add('editing');
         isEditing = true;
+        editor.focus();
     } else {
-        // 조회 모드로 전환 (저장)
-        viewer.innerText = editor.value; // 에디터 내용을 뷰어로 복사
-        editor.style.display = 'none';
+        contentData = editor.value;
         viewer.style.display = 'block';
-        btn.innerText = '편집 시작';
+        editor.style.display = 'none';
+        editBtn.innerText = '편집 시작';
+        editBtn.classList.remove('editing');
         isEditing = false;
-        // 여기서 나중에 Firebase 저장 코드를 넣으면 됩니다!
+        render();
     }
 }
 
 function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
+    sidebar.classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('open');
 }
+
+function loadDoc(title) {
+    document.getElementById('current-title').innerText = title;
+    if(window.innerWidth <= 768) toggleSidebar();
+}
+
+render();
