@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yuta's Treatment Note</title>
+    <title>Yuta's Story Note</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
         <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+        
         <aside id="sidebar">
-            <div class="sidebar-header">📂 트리트먼트 목록</div>
-            <ul class="folder-list">
-                <li class="folder-item active" onclick="loadDoc('소설 A - 1장 줄거리')">📄 소설 A - 1장</li>
-                <li class="folder-item" onclick="loadDoc('소설 A - 2장 줄거리')">📄 소설 A - 2장</li>
-                <li class="folder-item" onclick="loadDoc('캐릭터 설정')">📄 캐릭터 설정</li>
-            </ul>
+            <div class="sidebar-header">
+                <h3>Story List</h3>
+                <button class="new-btn" onclick="createNewStory()">+ New</button>
+            </div>
+            <ul id="story-list" class="story-list"></ul>
         </aside>
+
         <main id="main-container">
             <header>
                 <div class="header-left">
                     <button id="menu-btn" onclick="toggleSidebar()">☰</button>
-                    <strong id="current-title">소설 A - 1장 줄거리</strong>
+                    <strong id="current-title">메인 줄거리</strong>
                 </div>
-                <button id="edit-btn" onclick="handleEdit()">편집 시작</button>
+                <div class="header-actions">
+                    <button id="sub-doc-btn" onclick="makeSubDocument()">파트 분리</button>
+                    <button id="edit-btn" onclick="handleEdit()">편집 시작</button>
+                </div>
             </header>
+
             <section id="content-wrapper">
                 <div class="paper">
                     <div id="viewer"></div>
-                    <textarea id="editor" placeholder="==중요포인트== 형식으로 작성하세요."></textarea>
+                    <textarea id="editor" placeholder="줄거리를 쓰세요..."></textarea>
                 </div>
             </section>
         </main>
