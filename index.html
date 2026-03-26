@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유타의 트리트먼트 노트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h3>📂 프로젝트</h3>
+                <button onclick="alert('새 폴더 기능 준비중')">+</button>
+            </div>
+            <ul id="folder-list">
+                <li>📄 소설 A - 시놉시스</li>
+                <li class="active">📄 소설 A - 1장 줄거리</li>
+                <li>📄 공모전 아이디어</li>
+            </ul>
+        </aside>
+
+        <main id="main-content">
+            <header id="top-bar">
+                <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <h2 id="doc-title">소설 A - 1장 줄거리</h2>
+                <button id="edit-btn" onclick="toggleEditMode()">편집 시작</button>
+            </header>
+
+            <article id="editor-container">
+                <div id="viewer" class="content-area">
+                    1. 오프닝<br>
+                    주인공 '민우'는 평범한 회사원이지만... <span class="highlight">의문의 편지를 받게 되면서</span> 일상이 균열이 간다.
+                </div>
+                <textarea id="editor" class="content-area" style="display: none;"></textarea>
+            </article>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
